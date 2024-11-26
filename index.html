@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Query Open redirect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body class="m-5">
+    <h1>string match</h1>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const url = params.get('url');
+        // UNSECURE
+        // Modificare il payload in base alla propria location.origin
+        // TRY ?url=https://aulab.it?url=http://127.0.0.1:5501
+        //if (url.includes(location.origin)) {
+        
+        if (url.match(location.origin)) {
+            // window.open con target "_self"
+            // modifichi location.href
+            // a con nessun target o target _self
+            location.replace(url);
+        } else {
+            alert("Link esterno!")
+        }
+
+        // SECURE
+        // if (location.origin == new URL(url).origin) {
+        //     location.replace(url);
+        // } else {
+        //     alert("Link esterno!")
+        // }
+    </script>
+</body>
+
+</html>
